@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <!-- Вертикальное меню -->
+        <aside class="sidebar">
+            <h5 class="sidebar-title">Категории товаров</h5>
+            <ul class="category-list">
+                {% for category in categories %}
+                    <li class="category-item">
+                        <a class="category-link" href="{% url 'catalog:catalog' category.slug %}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- Блок с карточками товаров -->
+        <main class="product-list">
+            {% for product in goods %}
+                <div class="product-card">
+                    <a href="{% url 'catalog:product' product.slug %}">
+                        <div class="product-image">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="product-info">
+                            <p class="product-name">{{ product.name|truncatechars:20 }}</p>
+                            <p class="product-description">{{ product.description|truncatechars:20 }}</p>
+                            <div class="rating">
+                                <span>⭐⭐⭐⭐☆</span> <!-- Пример оценки -->
+                            </div>
+                            {% if product.discount %}
+                                <p class="product-price"><s>{{ product.price }}</s> руб.</p>
+                                    <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
+                            {% else %}
+                                <p class="product-price">
+                                    <strong>{{ product.price }} руб.</strong>
+                                </p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </main>
+    </div>
+
+    <!-- Пагинация -->
+    {% include "includes/pagination.html" %}
+
+{% endblock content %}

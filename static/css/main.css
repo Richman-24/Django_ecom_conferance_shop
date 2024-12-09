@@ -1,0 +1,232 @@
+/* === Общие стили для страницы === */
+html, body {
+    height: 100%; /* Устанавливаем высоту для html и body */
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    font-family: Arial, sans-serif; /* Основной шрифт */
+}
+
+body {
+    display: flex; /* Используем Flexbox для body */
+    flex-direction: column; /* Устанавливаем направление колонок */
+}
+
+/* === Навигация === */
+.menu-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-bar a {
+    color: white; /* Устанавливаем цвет текста на белый */
+    text-decoration: none; /* Убираем подчеркивание */
+    margin: 0 15px; /* Отступы между ссылками */
+}
+
+.menu-bar a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* === Основной контейнер === */
+.container {
+    display: flex;
+    flex: 1; /* Позволяем контейнеру занимать оставшееся пространство */
+}
+
+/* === Сайдбар === */
+.sidebar {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 15px;
+}
+
+/* === Список товаров === */
+.product-list {
+    width: 80%;
+    display: flex;
+    gap: 20px; /* Отступы между карточками */
+    justify-content: center; /* Центрируем карточки на странице */
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+/* === Страница товара === */
+.product-page {
+    display: flex;
+    max-width: 1200px; /* Максимальная ширина страницы */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    padding: 20px; /* Отступы внутри контейнера */
+}
+
+.product-card {
+    width: calc(25% - 20px); /* Карточка занимает 1/4 ширины контейнера */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    background-color: #fff;
+}
+.product-card:hover {
+    transform: translateY(-5px); /* Поднимаем карточку при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* === Изображение товара === */
+.product-image {
+    flex: 0 0 25%; /* Задаем ширину 25% */
+    margin-right: 20px; /* Отступ справа для разделения с деталями товара */
+}
+
+.product-image img {
+    width: 100%; /* Изображение занимает 100% ширины контейнера */
+    height: auto; /* Сохраняем пропорции изображения */
+}
+
+/* === Детали товара === */
+.product-details {
+    flex: 1; /* Остальная часть карточки занимает оставшееся пространство */
+}
+
+.rating {
+    margin: 10px 0;
+}
+
+.price {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.discount {
+    color: red;
+    margin-left: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tags span {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+/* === Кнопки === */
+.buttons {
+    display: flex; /* Используем Flexbox для выравнивания кнопок в ряд */
+    gap: 10px; /* Отступы между кнопками */
+    margin-top: 20px; /* Отступ сверху для разделения с остальным контентом */
+}
+
+.btn {
+    padding: 8px 12px; /* Уменьшаем внутренние отступы кнопок */
+    font-size: 14px; /* Уменьшаем размер шрифта */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругляем углы */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    cursor: pointer; /* Указываем, что кнопка кликабельная */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Цвет фона при наведении */
+}
+
+.buttons button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #218838;
+}
+
+/* === Комментарии === */
+.comments {
+    margin-top: 20px;
+}
+
+.comment {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* === Пагинация === */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* === Футер === */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: auto; /* Отодвигаем футер вниз */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-left p, .footer-right p {
+    margin: 2px 0; /* Уменьшение расстояния между строками */
+}
+
+/* === Стили для боковой панели === */
+.sidebar {
+    background-color: #f8f9fa; /* Светлый фон для боковой панели */
+    border: 1px solid #dee2e6; /* Легкая граница */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 15px; /* Внутренние отступы */
+    margin-bottom: 20px; /* Отступ снизу для разделения с другими элементами */
+}
+
+.sidebar-title {
+    font-size: 18px; /* Размер шрифта заголовка */
+    font-weight: bold; /* Жирный шрифт */
+    margin-bottom: 15px; /* Отступ снизу заголовка */
+    color: #333; /* Цвет текста заголовка */
+}
+
+.category-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+.category-item {
+    margin-bottom: 10px; /* Отступ между элементами списка */
+}
+
+.category-link {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #000; /* Черный цвет текста */
+    transition: color 0.3s; /* Плавный переход цвета */
+}
+
+.category-link:hover {
+    color: #0056b3; /* Цвет текста при наведении */
+}

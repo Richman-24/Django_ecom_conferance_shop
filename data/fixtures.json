@@ -1,0 +1,102 @@
+[
+    {
+        "model": "goods.category",
+        "pk": 1,
+        "fields": {
+            "name": "Бразилия",
+            "slug": "braziliya",
+            "is_published": true,
+            "image": "category_images/image_2024-12-09_172420595.png"
+        }
+    },
+    {
+        "model": "goods.category",
+        "pk": 2,
+        "fields": {
+            "name": "Россия",
+            "slug": "rossiya",
+            "is_published": true,
+            "image": "category_images/image_2024-12-09_172446976.png"
+        }
+    },
+    {
+        "model": "goods.product",
+        "pk": 1,
+        "fields": {
+            "name": "Амина",
+            "slug": "amina",
+            "is_published": true,
+            "image": "product_images/amina_1.jpeg",
+            "description": "Идеально для пробуждения утром",
+            "amount": 4,
+            "price": "45000.00",
+            "discount": 10,
+            "rating": "2.5",
+            "category": 1
+        }
+    },
+    {
+        "model": "goods.product",
+        "pk": 2,
+        "fields": {
+            "name": "Женевьев",
+            "slug": "zhenevev",
+            "is_published": true,
+            "image": "product_images/jene_1.jpeg",
+            "description": "Для ценителей экзотики",
+            "amount": 2,
+            "price": "35000.00",
+            "discount": 10,
+            "rating": "2.5",
+            "category": 1
+        }
+    },
+    {
+        "model": "goods.product",
+        "pk": 3,
+        "fields": {
+            "name": "Асана",
+            "slug": "asana",
+            "is_published": true,
+            "image": "product_images/asana_1.jpeg",
+            "description": "Горячая, крепкая, бодрящая",
+            "amount": 4,
+            "price": "25000.00",
+            "discount": 10,
+            "rating": "2.5",
+            "category": 1
+        }
+    },
+    {
+        "model": "goods.product",
+        "pk": 4,
+        "fields": {
+            "name": "Мария",
+            "slug": "mariya",
+            "is_published": true,
+            "image": "product_images/masha_1.jpeg",
+            "description": "Отечественная прожарка",
+            "amount": 2,
+            "price": "55000.00",
+            "discount": 15,
+            "rating": "2.5",
+            "category": 2
+        }
+    },
+    {
+        "model": "goods.product",
+        "pk": 5,
+        "fields": {
+            "name": "Алиса",
+            "slug": "alisa",
+            "is_published": true,
+            "image": "product_images/image_2024-12-09_173304250.png",
+            "description": "Русская, надежная, своя",
+            "amount": 1,
+            "price": "65000.00",
+            "discount": 5,
+            "rating": "2.5",
+            "category": 2
+        }
+    }
+]
