@@ -230,3 +230,134 @@ footer {
 .category-link:hover {
     color: #0056b3; /* Цвет текста при наведении */
 }
+
+/* === Стили для формы регистрации === */
+.registration-form {
+    background-color: #f8f9fa; /* Светлый фон для формы */
+    border: 1px solid #dee2e6; /* Легкая граница */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 400px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для формы */
+}
+
+.form-title {
+    text-align: center; /* Центрирование заголовка */
+    margin-bottom: 20px; /* Отступ снизу заголовка */
+    font-size: 24px; /* Размер шрифта заголовка */
+    color: #333; /* Цвет текста заголовка */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Отступ между полями формы */
+}
+
+label {
+    font-weight: bold; /* Жирный шрифт для меток */
+    color: #333; /* Черный цвет текста меток */
+}
+
+input.form-control {
+    border: 1px solid #ced4da; /* Цвет границы полей ввода */
+    border-radius: 4px; /* Закругленные углы полей ввода */
+    padding: 10px; /* Внутренние отступы полей ввода */
+}
+
+input.form-control:focus {
+    border-color: #007bff; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+}
+
+.btn-primary {
+    width: 100%; /* Кнопка занимает всю ширину формы */
+    padding: 10px; /* Внутренние отступы кнопки */
+    font-size: 16px; /* Размер шрифта кнопки */
+}
+
+/* === Стили для формы аутентификации === */
+.login-form {
+    background-color: #f8f9fa; /* Светлый фон для формы */
+    border: 1px solid #dee2e6; /* Легкая граница */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 400px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для формы */
+}
+
+.form-title {
+    text-align: center; /* Центрирование заголовка */
+    margin-bottom: 20px; /* Отступ снизу заголовка */
+    font-size: 24px; /* Размер шрифта заголовка */
+    color: #333; /* Цвет текста заголовка */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Отступ между полями формы */
+}
+
+label {
+    font-weight: bold; /* Жирный шрифт для меток */
+    color: #333; /* Черный цвет текста меток */
+}
+
+input.form-control {
+    border: 1px solid #ced4da; /* Цвет границы полей ввода */
+    border-radius: 4px; /* Закругленные углы полей ввода */
+    padding: 10px; /* Внутренние отступы полей ввода */
+}
+
+input.form-control:focus {
+    border-color: #007bff; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+}
+
+.btn-primary {
+    width: 100%; /* Кнопка занимает всю ширину формы */
+    padding: 10px; /* Внутренние отступы кнопки */
+    font-size: 16px; /* Размер шрифта кнопки */
+}
+
+
+/* === Стили для формы выхода === */
+.container {
+    margin-top: 50px; /* Отступ сверху для контейнера */
+}
+
+h2 {
+    margin-bottom: 20px; /* Отступ снизу заголовка */
+    color: #333; /* Цвет текста заголовка */
+}
+
+.text-center {
+    text-align: center; /* Центрирование текста */
+}
+
+.btn {
+    margin: 5px; /* Отступ между кнопками */
+    padding: 10px 20px; /* Внутренние отступы кнопок */
+    font-size: 16px; /* Размер шрифта кнопок */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Цвет фона для кнопки "Войти снова" */
+    border-color: #007bff; /* Цвет границы для кнопки "Войти снова" */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Цвет фона для кнопки "На главную" */
+    border-color: #6c757d; /* Цвет границы для кнопки "На главную" */
+}
+
+/* === Стили профиля пользователя === */
+
+.avatar {
+    width: 15%;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 auto 20px; /* Центрирование и отступ снизу */
+}
+.profile-info, .purchase-list {
+    margin-bottom: 30px;
+}
