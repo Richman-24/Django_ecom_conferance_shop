@@ -31,7 +31,6 @@
             "amount": 4,
             "price": "45000.00",
             "discount": 10,
-            "rating": "2.5",
             "category": 1
         }
     },
@@ -47,7 +46,6 @@
             "amount": 2,
             "price": "35000.00",
             "discount": 10,
-            "rating": "2.5",
             "category": 1
         }
     },
@@ -63,7 +61,6 @@
             "amount": 4,
             "price": "25000.00",
             "discount": 10,
-            "rating": "2.5",
             "category": 1
         }
     },
@@ -79,7 +76,6 @@
             "amount": 2,
             "price": "55000.00",
             "discount": 15,
-            "rating": "2.5",
             "category": 2
         }
     },
@@ -95,7 +91,6 @@
             "amount": 1,
             "price": "65000.00",
             "discount": 5,
-            "rating": "2.5",
             "category": 2
         }
     }
