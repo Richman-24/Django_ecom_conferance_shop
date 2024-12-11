@@ -55,7 +55,7 @@ class Product(BaseGoodModel):
         db_table = "product"
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
-        ordering = ('name',)
+        ordering = ("name",)
 
     def __str__(self):
         return f"{self.name} - {self.amount}"
@@ -64,3 +64,29 @@ class Product(BaseGoodModel):
     def sell_price(self):
         discount_amount = (self.price * self.discount) / 100
         return self.price - discount_amount
+
+
+class Favorite(models.Model):
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        related_name="favorites",
+        verbose_name="Продукт",
+    )
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name="favorites",
+        verbose_name="Пользователь",
+    )
+
+    class Meta:
+        db_table = "favorite"
+        verbose_name = "Избранное"
+        verbose_name_plural = "Избранные"
+        ordering = ("user__username",)
+        constraints = (
+            models.UniqueConstraint(
+                fields=("user", "product"), name="unique_favorite_product"
+            ),
+        )

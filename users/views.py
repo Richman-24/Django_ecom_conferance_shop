@@ -49,6 +49,12 @@ class UserpPofile(LoginRequiredMixin, UpdateView):
     def form_invalid(self, form):
         print("# Всё HE ОК")
         return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Личный кабинет"
+        context["favorites"] = (favorite.product for favorite in self.request.user.favorites.all())
+        return context
 
 @login_required
 def logout(request):

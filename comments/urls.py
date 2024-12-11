@@ -1,9 +1,8 @@
-from django.urls import include, path
+from django.urls import path
 
 from comments.views import AddCommentView, DeleteCommentView, EditCommentView
 
-app_name = 'goods'
-
+app_name = 'comments'
 
 urlpatterns = [
     path("add/<int:pk>/", AddCommentView.as_view(), name="add_comment"),  

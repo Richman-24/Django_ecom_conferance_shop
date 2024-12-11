@@ -3,33 +3,52 @@
 
 {% block content %}
     <div class="product-page">
+        <!-- Изображение товара -->
         <div class="product-image">
-            <img src="{{product.image.url}}" alt="{{ product.name }}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
         </div>
-        <div class="product-details">
-            <h2>{{ product.name }}</h2>
-            <div class="rating">
-                <span>⭐ {{ average_rating }}</span> <!-- Оценка товара -->
-                <span>({{comment_count}}) отзыв(-ов)</span> <!-- Количество отзывов -->
+
+        <!-- Детали товара и кнопки -->
+        <div class="product-info">
+            <div class="product-details">
+                <h2>{{ product.name }}</h2>
+                <div class="rating">
+                    <span>⭐ {{ average_rating }}</span> <!-- Оценка товара -->
+                    <span>({{ comment_count }}) отзыв(-ов)</span> <!-- Количество отзывов -->
+                </div>
+                <p class="description">{{ product.description }}</p>
+                <div class="price">
+                    <span class="current-price">Цена: {{ product.price }} руб.</span>
+                    <span class="discount">Скидка: {{ product.discount }}%</span>
+                </div>
+                <div class="tags">
+                    <span>#кофе</span>
+                    <span>#напитки</span>
+                    <span>#органик</span>
+                </div>
             </div>
-            <p class="description">{{ product.description }}</p>
-            <div class="price">
-                <span class="current-price">Цена: {{ product.price }} руб.</span>
-                <span class="discount">Скидка: {{ product.discount }}%</span>
-            </div>
-            <div class="tags">
-                <span>#кофе</span>
-                <span>#напитки</span>
-                <span>#органик</span>
-            </div>
+
+            <!-- Кнопки -->
             <div class="buttons">
                 <button class="btn">Добавить в корзину</button>
-                <button class="btn">Добавить в избранное</button>
+                {% if is_favorite %}
+                    <form action="{% url 'goods:delete_favorite' product.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Убрать из избранного</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'goods:add_favorite' product.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Добавить в избранное</button>
+                    </form>
+                {% endif %}
                 <button class="btn">Поделиться ссылкой</button>
             </div>
         </div>
-        <div class="comments">
-            {% include "includes/comments.html" with comments=product.comments.all%}
-        </div>
+    </div>
+
+    <!-- Комментарии -->
+    <div class="comments">
+        {% include "includes/comments.html" with comments=product.comments.all %}
     </div>
 {% endblock content %}

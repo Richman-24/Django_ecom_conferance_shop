@@ -18,7 +18,7 @@ class Comment(models.Model):
         to=User, on_delete=models.SET_NULL, null=True, related_name="comments", verbose_name="Автор комментария"
     )
     rating = models.DecimalField(
-        default=2.5, max_digits=3, decimal_places=1, verbose_name="Оценка товара"
+        max_digits=2, decimal_places=1, verbose_name="Оценка товара"
     )
     text = models.TextField(blank=True, verbose_name="Текст комментария")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
@@ -28,7 +28,7 @@ class Comment(models.Model):
         db_table = "comment"
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
-        ordering = ("product", "created_at")
+        ordering = ("product__name", "created_at")
 
     def __str__(self):
         return f"{self.author}|{self.product} - {self.text[:ADMIN_LENGTH_LIMIT]}"

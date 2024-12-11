@@ -1,5 +1,8 @@
 from django.utils.http import urlencode
 from django import template
+from django.db.models import Avg
+
+from goods.models import Product
 
 register = template.Library()
 
