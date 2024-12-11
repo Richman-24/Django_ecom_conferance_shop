@@ -1,7 +1,7 @@
 <div class="row">
     <h3 class="mt-3 mb-3">Комментарии пользователей:</h3>
     {% if user.is_authenticated %}
-        <form action="{% url "catalog:add_comment" pk=product.id %}" method="post">
+        <form action="{% url "comments:add_comment" pk=product.id %}" method="post">
             {% csrf_token %}
             {{ comment_form.rating }}
             {{ comment_form.text }}
@@ -21,8 +21,8 @@
                 <strong>Оценка:</strong> ⭐ ({{comment.rating}}) <br>
                 <p> {{ comment.text }} </p>
                 {% if comment.author == user %}
-                <a href="{% url 'catalog:edit_comment' pk=comment.pk %}">Редактировать</a> |
-                <a href="{% url 'catalog:delete_comment' pk=comment.pk %}">Удалить</a>
+                <a href="{% url 'comments:edit_comment' pk=comment.pk %}">Редактировать</a> |
+                <a href="{% url 'comments:delete_comment' pk=comment.pk %}">Удалить</a>
                 {% endif %}
             </div>
         {% endfor %}

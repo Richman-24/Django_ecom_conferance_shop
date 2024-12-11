@@ -1,6 +1,6 @@
 from django import forms
 
-from goods.models import Comment
+from comments.models import Comment
 
 # Сделать валидатор оценки от 1 ло 5, и в базе тоже
 # Добавить фильт матерных слов
