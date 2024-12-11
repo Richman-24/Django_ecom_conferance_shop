@@ -1,5 +1,89 @@
 [
     {
+        "model": "comments.comment",
+        "pk": 1,
+        "fields": {
+            "product": 5,
+            "author": 1,
+            "rating": "5.0",
+            "text": "Лучшее что случалось со мной в жизни!",
+            "created_at": "2024-12-11T16:10:50.092Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 2,
+        "fields": {
+            "product": 5,
+            "author": 1,
+            "rating": "5.0",
+            "text": "Просто невероятное!",
+            "created_at": "2024-12-11T16:11:01.039Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 3,
+        "fields": {
+            "product": 5,
+            "author": 1,
+            "rating": "3.0",
+            "text": "Не понравилось. Слишком холодно",
+            "created_at": "2024-12-11T16:11:17.152Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 4,
+        "fields": {
+            "product": 5,
+            "author": 1,
+            "rating": "4.0",
+            "text": "А мне нормально",
+            "created_at": "2024-12-11T16:11:40.393Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 5,
+        "fields": {
+            "product": 1,
+            "author": 1,
+            "rating": "4.0",
+            "text": "Нраица",
+            "created_at": "2024-12-11T16:13:21.249Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 6,
+        "fields": {
+            "product": 1,
+            "author": 1,
+            "rating": "5.0",
+            "text": "Люблю погорячее",
+            "created_at": "2024-12-11T16:13:28.093Z",
+            "is_published": true
+        }
+    },
+    {
+        "model": "comments.comment",
+        "pk": 7,
+        "fields": {
+            "product": 1,
+            "author": 1,
+            "rating": "5.0",
+            "text": "Шутки классные!",
+            "created_at": "2024-12-11T16:13:34.832Z",
+            "is_published": true
+        }
+    },
+    {
         "model": "goods.category",
         "pk": 1,
         "fields": {
@@ -92,6 +176,48 @@
             "price": "65000.00",
             "discount": 5,
             "category": 2
+        }
+    },
+    {
+        "model": "goods.favorite",
+        "pk": 1,
+        "fields": {
+            "product": 5,
+            "user": 1
+        }
+    },
+    {
+        "model": "goods.favorite",
+        "pk": 2,
+        "fields": {
+            "product": 1,
+            "user": 1
+        }
+    },
+    {
+        "model": "goods.favorite",
+        "pk": 3,
+        "fields": {
+            "product": 2,
+            "user": 1
+        }
+    },
+    {
+        "model": "users.usermodel",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$ckAYmNg976NN37z4gkOyxX$yMyEL7guYo16CTK9oUj3+f1Yib8Youk+HyBnJwGon2Y=",
+            "last_login": "2024-12-11T16:07:43.940Z",
+            "is_superuser": true,
+            "is_staff": true,
+            "date_joined": "2024-12-11T16:04:19.594Z",
+            "username": "root",
+            "email": "root@root.py",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "groups": [],
+            "user_permissions": []
         }
     }
 ]
