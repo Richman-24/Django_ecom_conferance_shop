@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -54,16 +55,18 @@ class ProductView(DetailView):
         return context
 
     def is_favorite(self):
-        return self.request.user.favorites.filter(product=self.object).exists()
-
+        if self.request.user.is_authenticated:
+            return self.request.user.favorites.filter(product=self.object).exists()
+        return None
+    
     def average_rating(self):
         rating = self.object.comments.aggregate(Avg('rating'))['rating__avg']
         if rating:
-            return rating
+            return round(rating, 1)
         return "Пока нет оценок"
 
 # Представления работы с избранным
-class AddFavorite(View):
+class AddFavorite(LoginRequiredMixin, View):
     def post(self, request, product_slug):
         if request.user.favorites.filter(product__slug = product_slug).exists():
             raise ValueError("Товар уже в избранном")
@@ -77,7 +80,7 @@ class AddFavorite(View):
             "catalog:product", product_slug = product_slug
             )
 
-class DeleteFavorite(View):
+class DeleteFavorite(LoginRequiredMixin, View):
     def post(self, request, product_slug):
         favorite_obj = request.user.favorites.filter(product__slug = product_slug).first()
         print(favorite_obj)

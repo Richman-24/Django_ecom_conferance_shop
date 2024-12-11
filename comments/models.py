@@ -28,7 +28,7 @@ class Comment(models.Model):
         db_table = "comment"
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
-        ordering = ("product__name", "created_at")
+        ordering = ("product__name", "-created_at")
 
     def __str__(self):
         return f"{self.author}|{self.product} - {self.text[:ADMIN_LENGTH_LIMIT]}"
