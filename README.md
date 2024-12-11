@@ -13,7 +13,7 @@
 <img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=github&logoColor=white&labelColor=%23181717&color=%23070707" alt="Static Badge">
 </p>
 
-![Main page](./readme_docs/img/main.png)
+![Main page](./readme_docs/img/catalog.png)
 
 ## Особенности
 
