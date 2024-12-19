@@ -1,42 +1,59 @@
-from django.urls import reverse
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from django.shortcuts import get_object_or_404, redirect, render
 
-from carts.models import Cart
-from goods.models import Product
-
-
-# (Необходимо придумать структуру, чтобы обрабатывать
-# ошибки при вводе коментариев)
-
-class CartMixin:
-    model = Cart
-
-    def get_success_url(self):
-        product = Product.objects.get(pk=self.object.product.id)
-        return reverse(
-            "catalog:product",
-            kwargs={"product_slug": product.slug},
-        )
+from .models import Cart, Product
 
 
-class AddCartView(CartMixin, CreateView):
-    template_name = "goods/product.html"
+class CartView(LoginRequiredMixin, View):
+    """Класс для отображения страницы корзины."""
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.product = Product.objects.get(pk=self.kwargs.get("pk"))
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        response = super().form_invalid(form)
-        return response
+    def get(self, request):
+        user_carts = Cart.objects.filter(user=request.user)
+        context = {"carts": user_carts}
+        return render(request, "carts/cart.html", context)
 
 
-# Добавить пермишн на проверку - только автор или админ
-class EditCartView(CartMixin, UpdateView):
-    template_name = "carts/Cart_edit.html"
+class CartAddView(View):
+    """Класс для добавления товаров в корзину."""
+
+    def post(self, request, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        user_cart, created = Cart.objects.get_or_create(user=request.user, product=product)
+
+        if not created:
+            user_cart.amount += 1
+        user_cart.save()
+
+        return redirect('goods:product', product_slug=product.slug)
 
 
-# Добавить пермишн на проверку - только автор или админ
-class DeleteCartView(CartMixin, DeleteView):
-    template_name = "carts/Cart_delete.html"
+class UpdateCartView(LoginRequiredMixin, View):
+    def post(self, request, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        user_cart = get_object_or_404(Cart, user=request.user, product=product)
+
+        action = request.POST.get('action')
+
+        if action == 'increase':
+            user_cart.amount += 1
+        elif action == 'decrease':
+            if user_cart.amount > 1:
+                user_cart.amount -= 1
+            else:
+                user_cart.delete()
+                return redirect('carts:cart')
+
+        user_cart.save()
+        return redirect('carts:cart')
+
+
+class CartRemoveView(LoginRequiredMixin, View):
+    """Класс для удаления товаров из корзины."""
+
+    def post(self, request, product_slug):
+        product = get_object_or_404(Product, slug=product_slug)
+        user_cart = get_object_or_404(Cart, user=request.user, product=product)
+        user_cart.delete()
+
+        return redirect('carts:cart')

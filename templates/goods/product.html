@@ -30,7 +30,11 @@
 
             <!-- Кнопки -->
             <div class="buttons">
-                <button class="btn">Добавить в корзину</button>
+                <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Добавить в корзину</button>
+                </form>
+
                 {% if is_favorite %}
                     <form action="{% url 'goods:delete_favorite' product.slug %}" method="POST">
                         {% csrf_token %}

@@ -3,7 +3,7 @@
         <a href="{% url "index" %}">Главная</a>
         <a href="#">О нас</a>
         <a href="#">Доставка</a>
-        <a href="#">Корзина</a>
+        <a href="{% url "carts:cart" %}">Корзина</a>
         {% if not user.is_authenticated %}
         <a href="{% url "users:login" %}">Вход</a>
         <a href="{% url "users:signup" %}">Регистрация</a>
