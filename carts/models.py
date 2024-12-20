@@ -9,16 +9,14 @@ from goods.models import Product
 User = get_user_model()
 
 
-class CartManager(models.Manager):
+class CartManager(models.QuerySet):
 
     def total_price(self):
-        return sum(cart.product_price() for cart in self.get_queryset())
+        return sum(cart.cart_price for cart in self)
 
     def total_amount(self):
         return (
-            sum(cart.amount for cart in self.get_queryset())
-            if self.get_queryset().exists()
-            else 0
+            sum(cart.amount for cart in self) if self else 0
         )
 
 
@@ -47,7 +45,7 @@ class Cart(models.Model):
         verbose_name_plural = "Корзины"
         ordering = ("user__username", "created_at")
 
-    objects = CartManager()
+    objects = CartManager().as_manager()
 
     @property
     def cart_price(self):

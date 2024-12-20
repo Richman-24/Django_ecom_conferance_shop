@@ -28,6 +28,7 @@
                             <p class="product-description">{{ product.description|truncatechars:20 }}</p>
                             <div class="rating">
                                 <span>⭐⭐⭐⭐☆</span> <!-- Пример оценки -->
+                                
                             </div>
                             {% if product.discount %}
                                 <p class="product-price"><s>{{ product.price }}</s> руб.</p>
@@ -37,6 +38,12 @@
                                     <strong>{{ product.price }} руб.</strong>
                                 </p>
                             {% endif %}
+                            <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
+                                  <img src="{% static 'images/add_to_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
+                                </button>
+                            </form>
                         </div>
                     </a>
                 </div>
