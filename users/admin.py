@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
-from goods.admin import FavoriteTab
+from favorites.admin import FavoriteTab
 
 User = get_user_model()
 

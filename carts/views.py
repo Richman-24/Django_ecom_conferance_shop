@@ -36,7 +36,7 @@ class CartView(LoginRequiredMixin, View):
         return all_products.exclude(slug__in=cart_product_slugs)
 
 
-class CartAddView(View):
+class CartAddView(LoginRequiredMixin, View):
     """Класс для добавления товаров в корзину."""
 
     def post(self, request, product_slug):

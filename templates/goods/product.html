@@ -36,12 +36,12 @@
                 </form>
 
                 {% if is_favorite %}
-                    <form action="{% url 'goods:delete_favorite' product.slug %}" method="POST">
+                    <form action="{% url 'favorites:delete_favorite' product.slug %}" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="btn">Убрать из избранного</button>
                     </form>
                 {% else %}
-                    <form action="{% url 'goods:add_favorite' product.slug %}" method="POST">
+                    <form action="{% url 'favorites:add_favorite' product.slug %}" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="btn">Добавить в избранное</button>
                     </form>
