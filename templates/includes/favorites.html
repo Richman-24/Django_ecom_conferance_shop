@@ -1,0 +1,14 @@
+<div class="product-card">
+    <a href="{% url 'catalog:product' product.slug %}">
+        <div class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-info-prof">
+            <b><p class="product-name">{{ product.name|truncatechars:20 }}</p></b>
+            <div class="rating">
+                <span>⭐ 4.9 </span>
+            </div>
+            <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
+        </div>
+    </a>
+</div>

@@ -26,6 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'carts',
+    'comments',
+    'goods',
+    'users',
+    'favorites',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -43,7 +50,7 @@ ROOT_URLCONF = 'coffeeshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,3 +115,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.UserModel'
+
+LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/"
+
+RESERVED_USERNAMES = [
+    name.strip() for name in os.getenv('RESERVED_USERNAMES').split(',')
+    ]

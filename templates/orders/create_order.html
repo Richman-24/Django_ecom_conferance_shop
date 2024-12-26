@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <h2> Оформление заказа: </h2>
+    
+    {% for cart in carts %}
+        <div class="cart-" style="display: flex; justify-content: space-between; align-s: center; padding: 10px 0; border-bottom: 1px solid #dee2e6;">
+          <span style="flex: 0 0 70%;">{{ cart.product.name }}</span>
+          <div class="-controls" style="flex: 0 0 30%; display: flex; justify-content: space-between; align-s: center;">
+              <form action="{% url 'carts:edit_cart' product_slug=cart.product.slug %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="decrease">
+                <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">-</button>
+            </form>
+            <span>{{ cart.amount }}</span>
+            <form action="{% url 'carts:edit_cart' product_slug=cart.product.slug %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="increase">
+                <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">+</button>
+            </form>
+            <form action="{% url 'carts:delete_cart' cart.product.slug%}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
+                <img src="{% static 'images/delete_from_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
+              </button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border-top: 1px solid #dee2e6;">
+          <p style="margin: 0;">Итого <strong>{{ carts.total_amount }}</strong> товар(а) на сумму</p>
+          <h4 style="margin: 0;"><strong>{{ carts.total_price }} руб.</strong></h4>
+        </div>
+
+        <h2 class="text-center mb-4">Детали заказа</h2>
+
+        <form method="post" class="order-form">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                {{ form }}
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+{% endblock content %}

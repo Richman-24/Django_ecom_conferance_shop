@@ -1,0 +1,465 @@
+/* === Общие стили === */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* === Навигация === */
+.menu-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.menu-bar a:hover {
+    text-decoration: underline;
+}
+
+/* === Основной контейнер === */
+.container {
+    display: flex;
+    flex: 1;
+    margin-top: 50px; /* Для формы выхода */
+}
+
+/* === Сайдбар === */
+.sidebar {
+    width: 20%;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-item {
+    margin-bottom: 10px;
+}
+
+.category-link {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+.category-link:hover {
+    color: #0056b3;
+}
+
+/* === Список товаров === */
+.product-list {
+    width: 80%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.product-card {
+    width: calc(25% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    background-color: #fff;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* === Изображение товара === */
+.product-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* === Страница товара === */
+.product-page {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px; /* Отступ между изображением и блоком с информацией */
+}
+
+.product-image {
+    flex: 1; /* Изображение занимает 1 часть пространства */
+}
+
+.product-image img {
+    width: 100%; /* Изображение растягивается на всю ширину контейнера */
+    height: auto; /* Сохраняем пропорции изображения */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.product-image-detail img {
+    width: 5%; /* Изображение растягивается на всю ширину контейнера */
+    height: auto; /* Сохраняем пропорции изображения */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.product-info {
+    flex: 2; /* Блок с информацией занимает 2 части пространства */
+    display: flex;
+    flex-direction: column; /* Располагаем детали и кнопки вертикально */
+    gap: 20px; /* Отступ между деталями и кнопками */
+}
+
+.product-info-detail {
+    flex: 1; /* Блок с информацией занимает 2 части пространства */
+    display: flex;
+    flex-direction: row; /* Располагаем детали и кнопки вертикально */
+    gap: 5 px; /* Отступ между деталями и кнопками */
+}
+
+.product-details {
+    padding: 10px;
+    background-color: #f8f9fa; /* Светлый фон для блока с деталями */
+    border: 1px solid #dee2e6; /* Легкая граница */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.rating {
+    margin: 10px 0;
+}
+
+.price {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.discount {
+    color: red;
+    margin-left: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tags span {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+/* === Кнопки === */
+.buttons {
+    display: flex;
+    gap: 10px; /* Отступы между кнопками */
+    flex-wrap: wrap; /* Если кнопки не помещаются, они переносятся на следующую строку */
+}
+
+.btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* === Комментарии === */
+.comments {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* === Пагинация === */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* === Футер === */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-left p, .footer-right p {
+    margin: 2px 0;
+}
+
+/* === Формы === */
+.registration-form, .login-form {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* === Профиль пользователя === */
+.avatar {
+    width: 15%;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.profile-info, .purchase-list {
+    margin-bottom: 30px;
+}
+
+/* === Общие стили для страницы === */
+.container-f1 {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.custom-shadow {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* === Стили для аватара === */
+img.rounded-circle {
+    border: 2px solid #dee2e6;
+    padding: 5px;
+}
+
+/* === Стили для списка покупок и избранного === */
+.list-group-item {
+    border: none;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+}
+
+/* === Стили для списка продуктов === */
+.product-list {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет карточкам переноситься на следующую строку */
+    justify-content: space-between; /* Распределяет карточки по всей ширине */
+}
+
+.product-card {
+    flex: 0 1 calc(25% - 15px); /* Каждая карточка занимает 25% ширины минус отступы */
+    margin-bottom: 20px; /* Отступ снизу для карточек */
+    max-width: 200px; /* Ограничение максимальной ширины карточки */
+}
+
+.product-image img {
+    width: 100%; /* Изображение растягивается на всю ширину карточки */
+    height: auto; /* Сохраняем пропорции изображения */
+}
+
+.product-info-prof {
+    flex-direction: column; /* Располагаем детали и кнопки вертикально */
+}
+
+/* === Стили для корзины === */
+.cart-items {
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 16px;
+    margin: 0;
+}
+
+.item-price {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-controls .form-control {
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.cart-actions {
+    margin-top: 20px;
+}
+
+.cart-actions .btn {
+    margin: 0 10px;
+}
+
+
+
+
+
+
+
+.recommendation-list {
+    display: flex;
+    flex-direction: column; /* Располагаем товары вертикально */
+    gap: 10px; /* Отступ между строками */
+  }
+  
+  .product-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .product-row img {
+    flex: 0 0 10%;
+    max-height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
+  }
+  
+  .product-row span {
+    text-align: left;
+  }
+  
+  .product-row span:last-child {
+    flex: 0 0 20%;
+    text-align: right;
+  }

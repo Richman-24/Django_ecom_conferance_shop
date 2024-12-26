@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <!-- Вертикальное меню -->
+        <aside class="sidebar">
+            <h5 class="sidebar-title">Категории товаров</h5>
+            <ul class="category-list">
+                {% for category in categories %}
+                    <li class="category-item">
+                        <a class="category-link" href="{% url 'catalog:catalog' category.slug %}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- Блок с карточками товаров -->
+        <main class="product-list">
+            {% for product in goods %}
+                <div class="product-card">
+                    <a href="{% url 'catalog:product' product.slug %}">
+                        <div class="product-image">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="product-info">
+                            <b><p class="product-name">{{ product.name|truncatechars:20 }}</p></b>
+                            <p class="product-description">{{ product.description|truncatechars:20 }}</p>
+                            <div class="rating">
+                                <span>⭐⭐⭐⭐☆</span> <!-- Пример оценки -->
+                                
+                            </div>
+                            {% if product.discount %}
+                                <p class="product-price"><s>{{ product.price }}</s> руб.</p>
+                                    <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
+                            {% else %}
+                                <p class="product-price">
+                                    <strong>{{ product.price }} руб.</strong>
+                                </p>
+                            {% endif %}
+                            <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
+                                  <img src="{% static 'images/add_to_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
+                                </button>
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </main>
+    </div>
+
+    <!-- Пагинация -->
+    {% include "includes/pagination.html" %}
+
+{% endblock content %}
