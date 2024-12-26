@@ -43,16 +43,15 @@ class UserpPofile(LoginRequiredMixin, UpdateView):
         return self.request.user
     
     def form_valid(self, form):
-        print("# Всё ОК")
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        print("# Всё HE ОК")
         return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Личный кабинет"
+        context["purchases"] = self.request.user.orders.all()
         context["favorites"] = (favorite.product for favorite in self.request.user.favorites.all())
         return context
 

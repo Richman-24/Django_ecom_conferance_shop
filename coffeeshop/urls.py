@@ -13,6 +13,7 @@ urlpatterns = [
     path("comment/", include("comments.urls", namespace="comments")),
     path("favorite/", include("favorites.urls", namespace="favorite")),
     path("users/", include("users.urls", namespace="users")),
+    path("orders/", include("orders.urls", namespace="orders")),
 ]
 
 if settings.DEBUG:

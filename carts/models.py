@@ -15,9 +15,7 @@ class CartManager(models.QuerySet):
         return sum(cart.cart_price for cart in self)
 
     def total_amount(self):
-        return (
-            sum(cart.amount for cart in self) if self else 0
-        )
+        return sum(cart.amount for cart in self)
 
 
 class Cart(models.Model):

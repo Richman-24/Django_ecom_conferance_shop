@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid" style="padding: 20px;">
+
+  <!-- Блок заказа пользователя -->
+  <div class="cart-s bg-white p-4 rounded custom-shadow">
+    <h2 class="text-center mb-4">Детали заказа № {{ order.pk }}</h2>
+    
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} text-center mb-4">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <h4 class="text-center mb-4">Статус заказа: {{ order.get_status_display }}</h4>
+    
+    {% for item in order.order_items.all %}
+    <div class="product-info-detail d-flex align-items-center mb-3 p-3 border rounded" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <!-- Изображение товара -->
+        <div class="product-image-detail" style="flex: 0 0 5%; margin-right: 15px;">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+        </div>
+        <!-- Информация о товаре -->
+        <p class="description mb-0" style="flex: 1; text-align: left;">{{ item.product.name }} в количестве: {{ item.amount }} шт.</p>
+    </div>
+    {% endfor %}
+
+    <!-- Кнопки управления заказом -->
+    <div class="cart-actions d-flex justify-content-between mt-4">
+      <form action="{% url 'orders:create_order' %}" method="POST" style="flex: 1; margin-right: 10px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary w-100">Отменить</button>
+      </form>
+      <button class="btn btn-secondary w-100" style="flex: 1;">Написать в поддержку</button>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}

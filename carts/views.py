@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,7 +10,7 @@ class CartView(LoginRequiredMixin, View):
     """Класс для отображения страницы корзины."""
 
     def get(self, request):
-        user_carts = self.get_user_carts(request.user)
+        user_carts = self.get_user_carts()
         recommended_products = self.get_recommended_products(user_carts)
         total_amount = user_carts.total_amount()
         total_price = user_carts.total_price()
@@ -22,9 +23,9 @@ class CartView(LoginRequiredMixin, View):
         }
         return render(request, "carts/cart.html", context)
 
-    def get_user_carts(self, user):
+    def get_user_carts(self):
         """Получить корзину пользователя."""
-        return Cart.objects.filter(user=user)
+        return self.request.user.carts.all()
 
     def get_recommended_products(self, user_carts):
         """
@@ -44,8 +45,12 @@ class CartAddView(LoginRequiredMixin, View):
         user_cart, created = Cart.objects.get_or_create(user=request.user, product=product)
 
         if not created:
-            user_cart.amount += 1
-        user_cart.save()
+            if user_cart.amount < product.amount:
+                user_cart.amount += 1
+                user_cart.save()
+            else:
+                message = f"Товара {product.name} на складе: {product.amount}. Нельзя добавить больше."
+                messages.error(request, message)
 
         referer = request.META.get('HTTP_REFERER', 'goods:product')
 
@@ -60,8 +65,12 @@ class UpdateCartView(LoginRequiredMixin, View):
         action = request.POST.get('action')
 
         if action == 'increase':
-            user_cart.amount += 1
-            user_cart.save()
+            if user_cart.amount < product.amount:
+                user_cart.amount += 1
+                user_cart.save()
+            else:
+                message = f"Товара {product.name} на складе: {product.amount}. Нельзя добавить больше."
+                messages.error(request, message)
         elif action == 'decrease':
             if user_cart.amount > 1:
                 user_cart.amount -= 1
@@ -69,7 +78,9 @@ class UpdateCartView(LoginRequiredMixin, View):
             else:
                 user_cart.delete()
 
-        return redirect('carts:cart')
+        referer = request.META.get('HTTP_REFERER', 'goods:product')
+
+        return redirect(referer)
 
 
 class CartRemoveView(LoginRequiredMixin, View):
@@ -80,7 +91,9 @@ class CartRemoveView(LoginRequiredMixin, View):
         user_cart = get_object_or_404(Cart, user=request.user, product=product)
         user_cart.delete()
 
-        return redirect('carts:cart')
+        referer = request.META.get('HTTP_REFERER', 'goods:product')
+
+        return redirect(referer)
 
 
 class ClearUserCartView(LoginRequiredMixin, View):

@@ -22,7 +22,7 @@ class AdminProduct(admin.ModelAdmin):
         "description",
         "amount",
         ("price", "discount"),
-        "rating",
+        # "rating",
         "is_published",
         "image",
     )

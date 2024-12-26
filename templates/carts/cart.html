@@ -7,6 +7,13 @@
   <!-- Блок корзины пользователя -->
 <div class="cart-s" style="flex: 1; max-width: 50%; padding: 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); border-radius: 8px;">
     <h2 style="text-align: center;">Ваша корзина</h2>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert" style="text-align: center;">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
     <div>
       {% if carts|length == 0 %}
         <p style="text-align: center;">В корзине пока нет товаров</p>
@@ -42,7 +49,10 @@
         </div>
         <!-- Кнопки управления заказом -->
         <div class="cart-actions" style="display: flex; justify-content: space-between; margin-top: 20px;">
-          <button class="btn" style="flex: 1; margin-right: 10px;">Оформить заказ</button>
+          <form action="{% url 'orders:create_order' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn" style="flex: 1; margin-right: 10px;">Оформить заказ</button>
+          </form>
           {% if carts %}
           <form action="{% url 'carts:clear_cart' %}" method="POST">
             {% csrf_token %}

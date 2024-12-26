@@ -26,14 +26,25 @@
                     <span>#напитки</span>
                     <span>#органик</span>
                 </div>
+                {% if not product.is_published %} Товар закочился. Можете добавить в список ожидаемого.
+                {% else %} Товара {{ product.name}} на складе {{product.amount}} шт.
+                {% endif %}
             </div>
 
             <!-- Кнопки -->
             <div class="buttons">
-                <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn">Добавить в корзину</button>
-                </form>
+                {% if not product.is_published %} 
+                    {% comment %} <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                        {% csrf_token %} {% endcomment %}
+                        <button class="btn">Сообщить о поступлении.</button>
+                    {% comment %} </form> {% endcomment %}
+                {% else %}
+                    <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Добавить в корзину</button>
+                    </form>
+                {% endif %}
+                
 
                 {% if is_favorite %}
                     <form action="{% url 'favorites:delete_favorite' product.slug %}" method="POST">

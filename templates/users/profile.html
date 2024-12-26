@@ -49,16 +49,6 @@
 
       <!-- Второй блок: Список покупок и избранное -->
       <div class="col-md-6">
-        <div class="bg-white p-4 mb-4 rounded custom-shadow">
-          <h3 class="text-center mb-4">Список покупок</h3>
-          <ul class="list-group">
-            {% for purchase in user.purchases.all %}
-              <li class="list-group-item">{{ purchase.item_name }} - {{ purchase.date }}</li>
-            {% empty %}
-              <li class="list-group-item">Нет покупок.</li>
-            {% endfor %}
-          </ul>
-        </div>
         <div class="bg-white p-4 rounded custom-shadow">
           <h3 class="text-center mb-4">Избранное</h3>
           <div class="product-list">
@@ -68,7 +58,32 @@
                   <div class="list-group-item">Нет избранных товаров.</div>
               {% endfor %}
           </div>
+        </div>
       </div>
+      <div class="bg-white p-4 mb-4 rounded custom-shadow border">
+        <h3 class="text-center mb-4">Список покупок</h3>
+        <ul class="list-group">
+            {% for purchase in purchases %}
+            <li class="list-group-item border mb-2 p-3" style="cursor: pointer;">
+                <a href="{% url "orders:detail_order" purchase.id %}" style="text-decoration: none; color: inherit;">  <!-- Убираем цвет и подчеркивание -->
+                    {{ purchase }} <br>
+                    Статус заказа: <span style="font-weight: bold; color: red;"> {{ purchase.get_status_display }}</span>
+                </a>
+                {% for item in purchase.order_items.all %}
+    <div class="product-info-detail d-flex align-items-center mb-1 p-1"">
+        <!-- Изображение товара -->
+        <div class="product-image-detail" style="flex: 0 0 5%; margin-right: 15px;">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+        </div>
+        <!-- Информация о товаре -->
+        <p class="description mb-0" style="flex: 1; text-align: left;">{{ item.product.name }} в количестве: {{ item.amount }} шт.</p>
+    </div>
+                {% endfor %}
+            </li>
+            {% empty %}
+                <li class="list-group-item">Нет покупок.</li>
+            {% endfor %}
+        </ul>
       </div>
     </div>
   </div>

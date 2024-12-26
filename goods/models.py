@@ -50,6 +50,7 @@ class Product(BaseGoodModel):
         related_name="categories",
         verbose_name="Категория",
     )
+    is_published = models.BooleanField(default=True, verbose_name="Отображать")
 
     class Meta:
         db_table = "product"
@@ -58,10 +59,16 @@ class Product(BaseGoodModel):
         ordering = ("name",)
 
     def __str__(self):
-        return f"{self.name} - {self.amount}"
+        return f"{self.name}| Количество {self.amount} шт."
 
     @property
     def sell_price(self):
         discount_amount = (self.price * self.discount) / 100
         return self.price - discount_amount
 
+    def save(self, *args, **kwargs):
+        if self.amount == 0:
+            self.is_published = False
+        else:
+            self.is_published = True
+        super().save(*args, **kwargs)

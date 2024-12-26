@@ -16,10 +16,12 @@ class CatalogView(ListView):
 
     def get_queryset(self):
         category_slug = self.kwargs.get("category_slug", "all")
+        queryset = super().get_queryset().filter(is_published=True, amount__gt=0)
+        
         if category_slug == "all":
-            queryset = super().get_queryset()
+            queryset = queryset
         else:
-            queryset = super().get_queryset().filter(category__slug=category_slug)
+            queryset = queryset.filter(category__slug=category_slug)
             if not queryset.exists():
                 raise Http404()
             self.title_obj = f"- {queryset[0].category.name}"
