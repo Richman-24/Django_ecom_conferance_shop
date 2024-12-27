@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load goods_tags %}
+{% load carts_tags %}
 
 {% block content %}
     <div class="container">
@@ -18,6 +19,7 @@
 
         <!-- Блок с карточками товаров -->
         <main class="product-list">
+            {% user_cart request as data %}
             {% for product in goods %}
                 <div class="product-card">
                     <a href="{% url 'catalog:product' product.slug %}">
@@ -38,12 +40,17 @@
                                     <strong>{{ product.price }} руб.</strong>
                                 </p>
                             {% endif %}
-                            <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
-                                  <img src="{% static 'images/add_to_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
-                                </button>
-                            </form>
+
+                            {% if product.id in data.product_list %}
+                                {% include "includes/cart_controls.html" %}
+                            {% else %}
+                                <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
+                                        <img src="{% static 'images/add_to_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
+                                    </button>
+                                </form>
+                            {% endif %}
                         </div>
                     </a>
                 </div>

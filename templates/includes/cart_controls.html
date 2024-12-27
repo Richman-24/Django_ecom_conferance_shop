@@ -1,0 +1,22 @@
+{% load carts_tags %}
+
+<div class="-controls" style="flex: 0 0 30%; display: flex; justify-content: space-between; align-s: center;">
+    <form action="{% url 'carts:edit_cart' product.slug %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="decrease">
+      <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">-</button>
+    </form>
+    <span>
+        {% with cart=data.carts|get_item:product.id %}
+            {% if cart.amount == 1 %}
+                В корзине
+            {% else %}
+                {{ cart.amount }}
+            {% endif %}</span>
+            <form action="{% url 'carts:edit_cart' product.slug %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="increase">
+                <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">+</button>
+            </form>
+        {% endwith %}
+</div>

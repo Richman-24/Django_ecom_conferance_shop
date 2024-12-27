@@ -16,10 +16,10 @@
         <div class="cart-" style="display: flex; justify-content: space-between; align-s: center; padding: 10px 0; border-bottom: 1px solid #dee2e6;">
           <span style="flex: 0 0 70%;">{{ cart.product.name }}</span>
           <div class="-controls" style="flex: 0 0 30%; display: flex; justify-content: space-between; align-s: center;">
-              <form action="{% url 'carts:edit_cart' product_slug=cart.product.slug %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="action" value="decrease">
-                <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">-</button>
+            <form action="{% url 'carts:edit_cart' product_slug=cart.product.slug %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="decrease">
+              <button class="btn btn-sm" style="padding: 5px 10px;" type="submit">-</button>
             </form>
             <span>{{ cart.amount }}</span>
             <form action="{% url 'carts:edit_cart' product_slug=cart.product.slug %}" method="post" style="display: inline;">
@@ -30,7 +30,7 @@
             <form action="{% url 'carts:delete_cart' cart.product.slug%}" method="POST">
               {% csrf_token %}
               <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
-                <img src="{% static 'images/delete_from_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">
+                <img src="{% static 'images/delete_from_cart.png' %}" alt="Убрать из корзину" style="max-height: 20px;">
               </button>
             </form>
           </div>
