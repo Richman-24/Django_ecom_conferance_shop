@@ -17,7 +17,9 @@ ALLOWED_HOSTS = [
     host.strip() for host in os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
     ]
 
-# Application definition
+INTERNAL_IPS = [
+    host.strip() for host in os.getenv('INTERNAL_IPS', '127.0.0.1').split(',')
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'debug_toolbar',
 
     'carts',
     'comments',
@@ -43,6 +47,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'coffeeshop.urls'

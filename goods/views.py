@@ -1,6 +1,5 @@
 from django.http import Http404
-from django.db.models import Avg
-from django.shortcuts import get_object_or_404
+from django.db.models import Avg, Count
 
 from django.views.generic import ListView, DetailView
 
@@ -16,11 +15,18 @@ class CatalogView(ListView):
 
     def get_queryset(self):
         category_slug = self.kwargs.get("category_slug", "all")
-        queryset = super().get_queryset().filter(is_published=True, amount__gt=0)
-        
-        if category_slug == "all":
-            queryset = queryset
-        else:
+        queryset = (
+            super()
+            .get_queryset()
+            .filter(is_published=True, amount__gt=0)
+            .select_related("category")
+            .prefetch_related("comments")
+            .annotate(
+                average_rating=Avg("comments__rating"), comments_count=Count("comments")
+            )
+        )
+
+        if category_slug != "all":
             queryset = queryset.filter(category__slug=category_slug)
             if not queryset.exists():
                 raise Http404()
@@ -42,13 +48,17 @@ class ProductView(DetailView):
     context_object_name = "product"
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Product, slug=self.kwargs[self.slug_url_kwarg])
+        queryset = (Product.objects
+        .prefetch_related("comments__author")
+        .annotate(average_rating=Avg("comments__rating"))
+        )
+        return queryset.get(slug=self.kwargs[self.slug_url_kwarg])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = f"CoffeeShop - {self.object.name}"
         context["is_favorite"] = self.is_favorite()
-        context["comment_form"] = CommentForm()  
+        context["comment_form"] = CommentForm()
 
         return context
 

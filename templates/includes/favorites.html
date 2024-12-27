@@ -1,13 +1,19 @@
 <div class="product-card">
-    <a href="{% url 'catalog:product' product.slug %}">
+    <a href="{% url 'goods:product' product.slug %}">
         <div class="product-image">
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
         </div>
         <div class="product-info-prof">
             <b><p class="product-name">{{ product.name|truncatechars:20 }}</p></b>
-            
-            {% include "includes/rating.html" %} <!-- Рейтинг -->
-
+            <!--КОСТЫЛЬ, ПОТОМУ ЧТО НЕ СМОГ ПРИДУМАТЬ НИЧЕГО ЛУЧШЕ -->
+            <div class="rating">
+                {% if favorite.average_rating %}
+                <span>⭐ {{ favorite.average_rating|floatformat:1 }}</span>
+                <span>({{ product.comments.count }}) отзыв(-ов)</span>
+                {% else %} ⭐ Нет оценок
+                {% endif %}
+            </div>
+            <!-- КОНЕЦ КОСТЫЛЯ -->
             <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
         </div>
     </a>

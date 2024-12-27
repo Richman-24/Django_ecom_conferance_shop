@@ -34,17 +34,15 @@
 
                             {% if product.discount %}
                                 <p class="product-price"><s>{{ product.price }}</s> руб.</p>
-                                    <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
+                                <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>
                             {% else %}
-                                <p class="product-price">
-                                    <strong>{{ product.price }} руб.</strong>
-                                </p>
+                                <p class="product-price"><strong>{{ product.price }} руб.</strong></p>
                             {% endif %}
 
                             {% if product.id in data.product_list %}
                                 {% include "includes/cart_controls.html" %}
                             {% else %}
-                                <form action="{% url 'carts:add_cart' product.slug%}" method="POST">
+                                <form action="{% url 'carts:add_cart' product.slug %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" class="add-to-cart" style="flex: 0 0 10%; background: none; border: none; cursor: pointer; margin-left: 10px;">
                                         <img src="{% static 'images/add_to_cart.png' %}" alt="Добавить в корзину" style="max-height: 20px;">

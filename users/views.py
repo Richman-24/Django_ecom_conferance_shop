@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
-
+from django.db.models import Avg, Count
 from users.forms import LoginForm, ProfileForm, SignUpForm
 
 
@@ -34,25 +34,31 @@ class UserSignUp(CreateView):
             return HttpResponseRedirect(self.get_success_url())
 
 
-class UserpPofile(LoginRequiredMixin, UpdateView):
+class UserProfile(LoginRequiredMixin, UpdateView):
     template_name = "users/profile.html"
     form_class = ProfileForm
     success_url = reverse_lazy("users:profile")
 
-    def get_object(self, queryset =None):
+    def get_object(self, queryset=None):
         return self.request.user
-    
+
     def form_valid(self, form):
         return super().form_valid(form)
 
     def form_invalid(self, form):
         return super().form_invalid(form)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Личный кабинет"
-        context["purchases"] = self.request.user.orders.all()
-        context["favorites"] = (favorite.product for favorite in self.request.user.favorites.all())
+        user = self.request.user
+        context["purchases"] = user.orders.prefetch_related('order_items__product')
+        context["favorites"] = (user.favorites.prefetch_related('product')
+        .annotate(
+                average_rating=Avg("product__comments__rating")
+            )
+        )
+
         return context
 
 @login_required
