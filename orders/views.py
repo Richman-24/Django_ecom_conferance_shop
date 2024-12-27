@@ -2,12 +2,13 @@ from django.contrib import messages
 from django.db import transaction
 from django.forms import ValidationError
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
+
 
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
@@ -34,12 +35,14 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
                             f"Недостаточное количество товара {product.name} на складе. В наличии - {product.amount}"
                         )
 
-                    order_items.append(OrderItem(
-                        order=order,
-                        price=product.sell_price,
-                        product=product,
-                        amount=amount
-                    ))
+                    order_items.append(
+                        OrderItem(
+                            order=order,
+                            price=product.sell_price,
+                            product=product,
+                            amount=amount,
+                        )
+                    )
 
                     product.amount -= amount
                     product.save()
@@ -70,7 +73,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class OrderDetailView(DetailView):
+class OrderDetailView(LoginRequiredMixin, DetailView):
     template_name = "orders/order_detail.html"
     pk_url_kwarg = "order_id"
     context_object_name = "order"
@@ -82,3 +85,21 @@ class OrderDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = f"CoffeeShop - {self.object}"
         return context
+
+
+class OrderRemoveView(LoginRequiredMixin, DeleteView):
+    template_name = "orders/order_delete.html"
+    pk_url_kwarg = "order_id"
+    context_object_name = 'order'
+    success_url = reverse_lazy("users:profile")
+    model = Order
+
+    def post(self, request, *args, **kwargs):
+        # Дальнейшая доработка зависит от политики компании: 
+        # Отмена отправляется к менеджеру на подтверждение
+        #   - Если менеджер подтверждает
+        #     - оплата возвращается клиенту
+        #     - количество товара на складе увеличивается
+
+        messages.success(self.request, "Заказ отменен!")
+        return super().post(request, *args, **kwargs)

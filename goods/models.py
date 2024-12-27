@@ -59,7 +59,7 @@ class Product(BaseGoodModel):
         ordering = ("name",)
 
     def __str__(self):
-        return f"{self.name}| Количество {self.amount} шт."
+        return f"{self.name}"
 
     @property
     def sell_price(self):

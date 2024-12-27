@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from comments.forms import CommentForm
 from comments.models import Comment
@@ -9,7 +10,7 @@ from goods.models import Product
 # ошибки при вводе коментариев)
 
 
-class CommentMixin:
+class CommentMixin(LoginRequiredMixin):
     model = Comment
 
     def get_success_url(self):

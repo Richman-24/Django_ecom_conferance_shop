@@ -22,7 +22,6 @@ class AddFavorite(LoginRequiredMixin, View):
 class DeleteFavorite(LoginRequiredMixin, View):
     def post(self, request, product_slug):
         favorite_obj = request.user.favorites.filter(product__slug = product_slug).first()
-        print(favorite_obj)
 
         if not favorite_obj:
             raise ValueError("Товара нет в избранном")

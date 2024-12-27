@@ -52,7 +52,7 @@ class CartAddView(LoginRequiredMixin, View):
                 message = f"Товара {product.name} на складе: {product.amount}. Нельзя добавить больше."
                 messages.error(request, message)
 
-        referer = request.META.get('HTTP_REFERER', 'goods:product')
+        referer = request.META.get('HTTP_REFERER', 'users:profile')
 
         return redirect(referer)
 
@@ -78,7 +78,7 @@ class UpdateCartView(LoginRequiredMixin, View):
             else:
                 user_cart.delete()
 
-        referer = request.META.get('HTTP_REFERER', 'goods:product')
+        referer = request.META.get('HTTP_REFERER', 'users:profile')
 
         return redirect(referer)
 
@@ -91,7 +91,7 @@ class CartRemoveView(LoginRequiredMixin, View):
         user_cart = get_object_or_404(Cart, user=request.user, product=product)
         user_cart.delete()
 
-        referer = request.META.get('HTTP_REFERER', 'goods:product')
+        referer = request.META.get('HTTP_REFERER', 'users:profile')
 
         return redirect(referer)
 
