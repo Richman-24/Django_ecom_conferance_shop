@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load goods_tags %}
 
 {% block content %}
     <div class="container">
@@ -26,10 +27,9 @@
                         <div class="product-info">
                             <b><p class="product-name">{{ product.name|truncatechars:20 }}</p></b>
                             <p class="product-description">{{ product.description|truncatechars:20 }}</p>
-                            <div class="rating">
-                                <span>⭐⭐⭐⭐☆</span> <!-- Пример оценки -->
-                                
-                            </div>
+                            
+                            {% include "includes/rating.html" %} <!-- Рейтинг -->
+
                             {% if product.discount %}
                                 <p class="product-price"><s>{{ product.price }}</s> руб.</p>
                                     <p class="product-price"><strong>{{ product.sell_price }} руб.</strong></p>

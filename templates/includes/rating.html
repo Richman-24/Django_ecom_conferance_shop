@@ -1,0 +1,9 @@
+{% load goods_tags %}
+
+<div class="rating">
+    <span>⭐ {% average_rating product %}</span> <!-- Оценка товара -->
+    {% comments_count product as count_comment %}
+    {% if count_comment %}
+    <span>({{count_comment}}) отзыв(-ов)</span> <!-- Количество отзывов -->
+    {% endif %}
+</div>

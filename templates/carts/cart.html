@@ -65,7 +65,9 @@
     <div class="recommendation-list">
       {% for product in recommended_products %}
       <div class="product-row" style="display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #dee2e6;">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="flex: 0 0 10%; max-height: 50px; object-fit: contain; margin-right: 10px;">
+        <a href="{% url "goods:product" product.slug %}"> 
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" style="flex: 0 0 10%; max-height: 50px; object-fit: contain; margin-right: 10px;">
+        </a>
         <span style="flex: 1; text-align: left;">{{ product.name }}</span>
         <span style="flex: 0 0 20%; text-align: right;">{{ product.sell_price }} ₽</span>
         <form action="{% url 'carts:add_cart' product.slug%}" method="POST">

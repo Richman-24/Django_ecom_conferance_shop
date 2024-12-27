@@ -73,7 +73,9 @@
     <div class="product-info-detail d-flex align-items-center mb-1 p-1">
         <!-- Изображение товара -->
         <div class="product-image-detail" style="flex: 0 0 5%; margin-right: 15px;">
-            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+          <a href="{% url "goods:product" item.product.slug %}">  
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+          </a>
         </div>
         <!-- Информация о товаре -->
         <p class="description mb-0" style="flex: 1; text-align: left;">{{ item.product.name }} в количестве: {{ item.amount }} шт.</p>

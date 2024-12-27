@@ -47,8 +47,6 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = f"CoffeeShop - {self.object.name}"
-        context["comment_count"] = self.object.comments.count()
-        context["average_rating"] = self.average_rating()
         context["is_favorite"] = self.is_favorite()
         context["comment_form"] = CommentForm()  
 
@@ -58,9 +56,3 @@ class ProductView(DetailView):
         if self.request.user.is_authenticated:
             return self.request.user.favorites.filter(product=self.object).exists()
         return None
-    
-    def average_rating(self):
-        rating = self.object.comments.aggregate(Avg('rating'))['rating__avg']
-        if rating:
-            return round(rating, 1)
-        return "Пока нет оценок"
